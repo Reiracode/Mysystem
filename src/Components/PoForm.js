@@ -345,7 +345,7 @@ const PoForm = () => {
               onClickOutside={() => {
                 SetShow(false);
               }}
-            ></OpenModal>
+            />
 
             <h2>View users List</h2>
             <ListTable

@@ -4,6 +4,7 @@ const OpenModal = (props) => {
   let ref = useRef(null);
   
   const handleClickOutsides = (event) => {
+    console.log(event)
     if (ref.current && !ref.current.contains(event.target)) {
       props.onClickOutside();
     }
@@ -17,7 +18,9 @@ const OpenModal = (props) => {
     <div className={showHideClassName} onClick={handleClickOutsides}>
       <section className="flex-crud" ref={ref}>
         {props.children}
-        <button onClick={props.handleClose}>Close</button>
+        <button className="btn btn-danger" onClick={props.handleClose}>Close</button>
+
+        {/* <button onClick={props.handleClose}>Cancel</button> */}
       </section>
     </div>
   );

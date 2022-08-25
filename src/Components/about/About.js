@@ -45,8 +45,9 @@ const About = () => {
 
   return (
     <section className="container contact">
-      <div className="page-2" id="page-about">
-        <div className="container">
+      <h1>About</h1>
+      {/* <div className="page-2" id="page-about">
+        <div className="container"> */}
           <nav>
             <a href="#about1">PAGE1</a>
             <a href="#about2">PAGE2</a>
@@ -74,8 +75,8 @@ const About = () => {
           </div>
 
 
-        </div>
-      </div>
+        {/* </div>
+      </div> */}
     </section>
   );
 }

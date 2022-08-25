@@ -233,7 +233,7 @@ const PrForm = (props) => {
             ) : null}
           </OpenModal>
 
-          <button className="btn add_item" type="button" onClick={showModa}>
+          <button className="btn btn-light" type="button" onClick={showModa}>
             +請購項目
           </button>
 

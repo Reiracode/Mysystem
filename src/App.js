@@ -19,6 +19,7 @@ const App = () => {
     <div className="App">
       <div className="page">
         <BrowserRouter basename="Mysystem">
+        {/* <BrowserRouter> */}
           <AuthProvider>
             <Navbar />
             <Routes>  

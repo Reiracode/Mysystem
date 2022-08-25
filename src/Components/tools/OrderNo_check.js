@@ -259,7 +259,7 @@ function OrderNo_check(props) {
               />
             </div>
             <button className="btn btn-light" onClick={setOn}>
-              關掉
+              close
             </button>
             <button className="btn btn-primary" onClick={checkButton}>
               確定
