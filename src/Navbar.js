@@ -66,8 +66,11 @@ const Navbar = (props) => {
           <NavLink to="/about">Outbox</NavLink>
         </li>
 
-        <li>
-          <a onClick={handleLogout}>logout</a>
+          <li>
+           
+            <a onClick={handleLogout}> <i className="fa-solid fa-arrow-right-from-bracket"></i></a>
+           
+      
         </li>
       </ul>
       </nav>

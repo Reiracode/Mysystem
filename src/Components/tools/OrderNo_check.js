@@ -34,9 +34,9 @@ function Table({ columns, data, onRowSelectStateChange, onRowClickFunc  }) {
       columns,
       data,
       initialState: {
-        selectedRowIds: {
-          "3":true
-        }
+        // selectedRowIds: {
+        //   "3":true
+        // }
       },
       stateReducer: (newState, action) => {
         console.log(action.id);
@@ -241,7 +241,7 @@ function OrderNo_check(props) {
 
   return (
     <>
-      <button className="btn btn-outline-secondary btn_line" onClick={setOn}>
+      <button className="btn btn-primary button_newitem" onClick={setOn}>
         請購單號
       </button>
       {modal ? (

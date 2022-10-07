@@ -32,7 +32,8 @@ const Login = () => {
   const initalMsg = { messclass: "alert alert-danger", message: " " };
 
   // login
-  const formInitial = { email: "", password: "" };
+  const formInitial = { email: "eve.holt@reqres.in", password: "cityslicka" };
+  // const formInitial = { email: "Developer5@gmail.com", password: "123456" };
   const [formList, setFormList] = useState(formInitial);
   const handleInputChange = (e) => {
     const { name, value } = e.target;

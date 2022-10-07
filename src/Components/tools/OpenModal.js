@@ -18,7 +18,7 @@ const OpenModal = (props) => {
     <div className={showHideClassName} onClick={handleClickOutsides}>
       <section className="flex-crud" ref={ref}>
         {props.children}
-        <button className="btn btn-danger" onClick={props.handleClose}>Close</button>
+        <button className="btn btn-danger button_close" onClick={props.handleClose}>Close</button>
 
         {/* <button onClick={props.handleClose}>Cancel</button> */}
       </section>

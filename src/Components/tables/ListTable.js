@@ -22,7 +22,7 @@ const ListTable = (props) => {
               <td>{user.smallp}</td>
               <td>
                 <button
-                  className="btn btn-info"
+                  className="btn btn-primary button_newitem"
                   onClick={(evt) => {
                     evt.preventDefault();
                     props.editRow(user);
@@ -33,7 +33,7 @@ const ListTable = (props) => {
                 </button>
 
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-danger button_close"
                   onClick={() => props.deleteUser(user.id)}
                 >
                   Delete

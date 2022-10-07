@@ -138,7 +138,7 @@ const PrForm = (props) => {
     //   .catch((error) => console.error("Error:", error));
     const fakedata = {"name": "morpheus","job": "leader"}
       
-      axios .post("https://reqres.in/api/users", data)
+      axios.post("https://reqres.in/api/users", data)
       .then((res) => {
         const ressponse = res.data;
         console.log(ressponse)
@@ -233,7 +233,7 @@ const PrForm = (props) => {
             ) : null}
           </OpenModal>
 
-          <button className="btn btn-light" type="button" onClick={showModa}>
+          <button className="btn btn-primary button_newitem" type="button" onClick={showModa}>
             +請購項目
           </button>
 
@@ -244,7 +244,7 @@ const PrForm = (props) => {
             deleteUser={deleteUser}
           />
         </div>
-        <button className="btn btn-primary" onClick={handleSubmit}>
+        <button className="btn btn-warning button_submit" onClick={handleSubmit}>
           submit
         </button>
       </div>

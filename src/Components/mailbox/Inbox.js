@@ -8,7 +8,6 @@ const Inbox = (props) => {
   let location = useLocation();
   console.log(location)
 
-
   // console.log(prop.location.state);
   const assignData = { item: {}, list: [], flow: [] };
   const [flowData, setFlowData] = useState(assignData);
@@ -66,7 +65,6 @@ const Inbox = (props) => {
         });
 
       })
-
   }, [props]);
 
   // 單身
@@ -98,7 +96,7 @@ const Inbox = (props) => {
   //簽核同意
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    var data = { assing: firstName, listno:location.state.listno };
+    var data = { assing: firstName, listno: location.state.listno };
     console.log(JSON.stringify(data));
 
     var url = singleton.domainName + "/sys_flow_approve.php";
@@ -130,15 +128,20 @@ const Inbox = (props) => {
         <div className="sign">
           <div className="sign_menu">
             <li onClick={handleSubmit}>
-              <a>Approved</a>
+              {/* <a> <i className="fa-regular fa-thumbs-up"></i></a> */}
+              {/* <a><i className="fa-regular fa-hand-point-right"></i></a> */}
+              <a><i className="fa-solid fa-play"></i></a>
             </li>
 
             <li>
-              <a>Rejected</a>
+              {/* <a>Rejected</a> */}
+              {/* <a><i className="fa-solid fa-screwdriver-wrench"></i></a> */}
+              <a><i className="fa-solid fa-ban"></i></a>
             </li>
 
             <li>
-              <a>overdue</a>
+              <a><i className="fa-solid fa-pause"></i></a>
+              {/* <a>overdue</a> */}
             </li>
           </div>
 
@@ -206,7 +209,7 @@ const Inbox = (props) => {
                 />
               </div>
             </div>
- 
+
           </div>
         </div>
 

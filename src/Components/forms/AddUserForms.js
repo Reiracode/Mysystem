@@ -48,7 +48,7 @@ const AddUserForm = (props) => {
       })
       }   
 
-      <button className="btn" onClick={addNew}>
+      <button className="btn btn-primary button_newitem" onClick={addNew}>
         Add new user
       </button>
       {/* <button onClick={() => props.SetShow(false)}>Cancel</button> */}

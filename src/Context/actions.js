@@ -5,6 +5,7 @@ import axios from "axios";
 
 export async function loginUser(dispatch, loginPayload) {
   const ROOT_URL = `https://reqres.in/api/login`;
+  // const ROOT_URL = `http://restapi.adequateshop.com/api/authaccount/login`;
   console.log(loginPayload);
     try {
       dispatch({ type: "REQUEST_LOGIN" });
@@ -20,6 +21,7 @@ export async function loginUser(dispatch, loginPayload) {
      // ==============================
       //模擬api 取得{token: 'QpwL5tke4Pnpja7X4'}後，有user資料
       if (data.token) { 
+        // if (data.message=='success') { 
           const logindata = { userno: "000002", dep: "資訊技術部", IsLogin: "true", loading: false }
           dispatch({ type: "LOGIN_SUCCESS", payload: logindata });
           localStorage.setItem("currentUser", JSON.stringify(logindata));

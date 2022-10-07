@@ -266,7 +266,7 @@ const PoForm = () => {
       <div className="flex_form">
         <form id="myForm" onSubmit={handleSubmit}>
           <div className="flex-large">
-            <h2 className="header_line">header</h2>
+            {/* <h2 className="header_line">header</h2> */}
             <div className="form-row">
               <div className="form-group col-md-6">
                 <label htmlFor="inputUsername">員工姓名</label>
@@ -356,7 +356,7 @@ const PoForm = () => {
             />
           </div>
 
-          <button className="btn btn-primary" type="submit">
+          <button className="btn btn-warning button_submit" type="submit">
             submit
           </button>
         </form>
