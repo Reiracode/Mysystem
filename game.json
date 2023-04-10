@@ -1,0 +1,132 @@
+[
+{
+  "date": "2022-03-08",
+  "awayTeam": "古巴",
+  "homeTeam": "荷蘭",
+  "inning": 9,
+  "venue": "臺中洲際棒球場",
+  "time": "3:07",
+  "audience": 6501,
+  "totalScore": {
+    "home": 4,
+    "away": 2
+  }
+},
+{
+  "date": "2022-03-08",
+  "awayTeam": "巴拿馬",
+  "homeTeam": "中華臺北",
+  "inning": 9,
+  "venue": "臺中洲際棒球場",
+  "time": "4:02",
+  "audience": 15540,
+  "totalScore": {
+    "home": 5,
+    "away": 12
+  }
+},
+{
+  "date": "2022-03-09",
+  "awayTeam": "巴拿馬",
+  "homeTeam": "荷蘭",
+  "inning": 9,
+  "venue": "臺中洲際棒球場",
+  "time": "2:45",
+  "audience": 6048,
+  "totalScore": {
+    "home": 3,
+    "away": 1
+  }
+},
+{
+  "date": "2022-03-09",
+  "awayTeam": "義大利",
+  "homeTeam": "古巴",
+  "inning": 10,
+  "venue": "臺中洲際棒球場",
+  "time": "3:43",
+  "audience": 6217,
+  "totalScore": {
+    "home": 3,
+    "away": 6
+  }
+},
+{
+  "date": "2022-03-10",
+  "awayTeam": "古巴",
+  "homeTeam": "巴拿馬",
+  "inning": 9,
+  "venue": "臺中洲際棒球場",
+  "time": "4:09",
+  "audience": 7023,
+  "totalScore": {
+    "home": 4,
+    "away": 13
+  }
+},
+{
+  "date": "2022-03-10",
+  "awayTeam": "義大利",
+  "homeTeam": "中華臺北",
+  "inning": 9,
+  "venue": "臺中洲際棒球場",
+  "time": "3:58",
+  "audience": 18799,
+  "totalScore": {
+    "home": 11,
+    "away": 7
+  }
+},
+{
+  "date": "2022-03-11",
+  "awayTeam": "巴拿馬",
+  "homeTeam": "義大利",
+  "inning": 9,
+  "venue": "臺中洲際棒球場",
+  "time": "2:57",
+  "audience": 7732,
+  "totalScore": {
+    "home": 0,
+    "away": 2
+  }
+},
+{
+  "date": "2023-03-11",
+  "homeTeam": "中華臺北",
+  "awayTeam": "荷蘭",
+  "inning": 9,
+  "stadium": "臺中洲際棒球場",
+  "time": "3:34",
+  "audience": 18826,
+  "totalScore": {
+    "home": 9,
+    "away": 5
+  }
+},
+{
+  "date": "2023-03-12",
+  "homeTeam": "中華臺北",
+  "awayTeam": "古巴",
+  "inning": 9,
+  "stadium": "臺中洲際棒球場",
+  "time": "3:21",
+  "audience": 18852,
+  "totalScore": {
+    "home": 1,
+    "away": 7
+  }
+},
+{
+  "date": "2023-03-12",
+  "homeTeam": "義大利",
+  "awayTeam": "荷蘭",
+  "inning": 9,
+  "stadium": "臺中洲際棒球場",
+  "time": "3:00",
+  "audience": 4985,
+  "totalScore": {
+    "home": 7,
+    "away": 1
+  }
+}
+]
