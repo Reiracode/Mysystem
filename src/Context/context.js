@@ -49,16 +49,16 @@ export function useAuthDispatch() {
 
 //最外一層：規劃login true 才能使用各routes
 //最外第二層：login true，才能使用各個dispatch
-
-//引入useReducer，取得state和dispatch。 useReducer(reducer函式, state的初始值);
+ 
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
-                    // AuthReducer = (initialState, action);
   return (
     <AuthStateContext.Provider value={state}>
       <AuthDispatchContext.Provider value={dispatch}>
         {children}
       </AuthDispatchContext.Provider>
     </AuthStateContext.Provider>
+
+ 
   );
 };

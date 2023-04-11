@@ -1,0 +1,9 @@
+[
+    { "id": "000001", "name": "John",  "up_dep": "no" },
+    { "id": "000101", "name": "Romy",  "up_dep": "000001" },
+    { "id": "000201", "name": "Celia", "up_dep": "000101" },
+    { "id": "000301", "name": "Mary",  "up_dep": "000101" },
+    { "id": "001101", "name": "John",  "up_dep": "000301" },
+    { "id": "001101", "name": "Akane", "up_dep": "001101" },
+    { "id": "221004", "name": "Reira", "up_dep": "000201" }
+  ]

@@ -21,7 +21,7 @@ const Navbar = (props) => {
 
 
   const location = useLocation();
-  console.log(location.pathname);
+  // console.log(location.pathname);
   // logout
   const dispatch = useAuthDispatch();
   const newStyle = show ? "active" : "";
@@ -61,7 +61,11 @@ const Navbar = (props) => {
         </li>
         <li>
           <NavLink to="/inbox">Inbox</NavLink>
-        </li>
+          </li>
+        
+
+
+          
         <li>
           <NavLink to="/about">Outbox</NavLink>
         </li>

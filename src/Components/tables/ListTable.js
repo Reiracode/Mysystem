@@ -1,40 +1,36 @@
 import React from 'react';
 // 請購單身
 const ListTable = (props) => {
-  console.log(props);
+  const initialState = { id: null, name: "", username: "", smallp: "" };
+  // props.bodyColumn
   return (
     <table className="table table-striped table-responsive-m">
       <thead>
-        <tr>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Usersmallp</th>
+        <tr>          
+          {Object.keys(props.bodyColumn).map((i) => (
+            i !== "id" && <th key={i}>{i}</th>
+          ))}
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        {/* {Object.keys(user).map((key, index) => { */}
-        {props.users.length > 0 ? (
-          props.users.map((user) => (
-            <tr key={user.id}>
+        {props.listBody.length > 0 ? (
+          props.listBody.map((user) => (
+            <tr key={user.id} data-id={user.id}>
               <td>{user.name}</td>
               <td>{user.username}</td>
               <td>{user.smallp}</td>
               <td>
                 <button
-                  className="btn btn-primary button_newitem"
-                  onClick={(evt) => {
-                    evt.preventDefault();
-                    props.editRow(user);
-                    props.isOpen(user);
-                  }}
+                  className="btn btn-primary button_newitem" data-low={(JSON.stringify(user))}
+                  onClick={() => props.editRow(user)}
                 >
                   Edit
                 </button>
 
                 <button
-                  className="btn btn-danger button_close"
-                  onClick={() => props.deleteUser(user.id)}
+                  className="btn btn-danger"
+                  onClick={() => props.deleteRow(user.id)}
                 >
                   Delete
                 </button>
@@ -52,4 +48,3 @@ const ListTable = (props) => {
 };
 
 export default ListTable;
- 

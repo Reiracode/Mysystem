@@ -14,6 +14,10 @@ export function InfoBox(props) {
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutsides, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutsides);
+    };
+    
   });
 
   if (!props.show) return null;

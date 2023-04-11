@@ -8,6 +8,7 @@ const useOutsideClick = (ref, callback) => {
   };
 
   useEffect(() => {
+    //註冊原生事件，return function裡面取消註冊事件。
     document.addEventListener("click", handleClick);
 
     return () => {

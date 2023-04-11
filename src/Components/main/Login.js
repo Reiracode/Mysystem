@@ -2,17 +2,24 @@ import React, { useState, Fragment } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 //globe state
 import { loginUser, createUser, useAuthState, useAuthDispatch } from "../../Context";
+import axios from "axios";
 
 const Login = () => {
-  let navigate = useNavigate();
+   // 使用 react-router-dom 的 Navigate 功能
+  const navigate = useNavigate();
+
+  // 取得全域狀態
+  const dispatch = useAuthDispatch();
+  const { errorMessage, IsLogin } = useAuthState();
+
   const [show, setShow] = useState(false);
   const setOn = () => {
     setShow(!show);
   };
 
-  // const newStyle = show ? "display-block" : "display-none";
+  // 定義視窗顯示狀態
   const newStyle = show ? "v_v" : "v_h";
-
+  // 定義卡片樣式
   const cardStyle = {
     height: show ? 0 : "250px",
     opacity: show ? 0 : 1,
@@ -25,42 +32,52 @@ const Login = () => {
     transition: "all .5s ease-in",
   };
 
-  //globe state ex:loginUser(dispatch, formList);
-  const dispatch = useAuthDispatch();
-  const { errorMessage, IsLogin } = useAuthState();
-  // login err msg
-  const initalMsg = { messclass: "alert alert-danger", message: " " };
+ 
 
-  // login
+ // 初始化登入表單資料
   const formInitial = { email: "eve.holt@reqres.in", password: "cityslicka" };
-  // const formInitial = { email: "Developer5@gmail.com", password: "123456" };
   const [formList, setFormList] = useState(formInitial);
+
+// 監聽登入表單輸入資料
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormList({ ...formList, [name]: value });
   };
 
+  // 登入
   const handleLogin = async (e) => {
     console.log("handleLogin");
     e.preventDefault();
     try {
       const response = await loginUser(dispatch, formList);
       console.log(response)
-      if (response == undefined) return;
-      if (!response.token) return;
-      // props.history.push("/about");
-      navigate('/about')
+
+
+      // getMe().then((response) => {
+      //   if (data.ok !== 1) {
+      //     // 在 getMe() 出錯代表還沒成功登入，因此要把 token 清空
+      //     setAuthToken(null);
+      //     setErrorMessage(response.toString());
+      //   }
+      //   setUser(response.data);
+      //   // 並導回首頁
+      //   history.push("/");
+
+
+      if(response && response.token) navigate("/about");
+
     } catch (error) {
       console.log(error);
     }
   };
 
-  // register
-  const regformInitial = { remail: "", rpassword: "" };
+
+
+ // 初始化註冊表單資料
+  const regformInitial = { remail: "eve.holt@reqres.in", rpassword: "pistol" };
   const [regformList, setregFormList] = useState(regformInitial);
   const handleresInputChange = (e) => {
     const { name, value } = e.target;
-    // setregFormList({ ...regformList, [name]: value });
     setregFormList({ ...regformList, [name]: value });
   };
 
@@ -68,12 +85,11 @@ const Login = () => {
     console.log("handleRegister");
     e.preventDefault();
     try {
-      // const response = await createUser(dispatch, regformList);
       const newregformList = { email: regformList.remail, password: regformList.rpassword };
       const response = await createUser(dispatch, newregformList);
       console.log(response)
       if (response == undefined) return;
-      navigate('/prform')
+      navigate("/prform")
     } catch (error) {
       console.log(error);
     }
@@ -81,15 +97,14 @@ const Login = () => {
   };
 
   return (
+
     <>
       {IsLogin ? (
         <Navigate to="/PrForm" />
-        // <Navigate to="/Reiraapp/PrForm" />
       ) : (
         <div className="login_form">
           <Fragment>
               <div className="form">
-                {/* REGISTER */}
               <form
                 style={cardStylea}
                 className={"flip-card register-form " + newStyle}
@@ -112,7 +127,7 @@ const Login = () => {
                     onChange={handleresInputChange}
                     placeholder="password"
                   />
- 
+
 
                 <button
                   type="button"
@@ -129,7 +144,7 @@ const Login = () => {
                   </a>
                   </p>
                   {errorMessage ? (
-                    <p className={initalMsg.messclass}>{errorMessage}</p>
+                    <p className="alert alert-danger">{errorMessage}</p>
                   ) : null}
               </form>
 
@@ -143,7 +158,7 @@ const Login = () => {
                     value={formList.email}
                     onChange={handleInputChange}
                   />
-        
+
                   <input
                     type="password"
                     name="password"
@@ -168,9 +183,9 @@ const Login = () => {
                   </a>
                 </p>
 
-    
+
                 {errorMessage ? (
-                  <p className={initalMsg.messclass}>{errorMessage}</p>
+                    <p className="alert alert-danger">{errorMessage}</p>
                 ) : null}
               </form>
             </div>
@@ -180,4 +195,8 @@ const Login = () => {
     </>
   );
 };
+
+
 export default Login;
+
+

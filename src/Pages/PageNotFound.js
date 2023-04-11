@@ -1,10 +1,10 @@
 import React from "react";
 
-const PageNotFound = (props) =>{
+const PageNotFound = () =>{
   return (
-    <div>
+    <section className="container contact">
       <h1>Page not found</h1>
-    </div>
+    </section>
   );
 }
 

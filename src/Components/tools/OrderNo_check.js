@@ -1,227 +1,67 @@
-import React, { useState, useEffect } from "react";
-import { useTable, useRowSelect } from "react-table";
+import React, { useState, useEffect, useCallback    } from "react";
 import axios from "axios";
+import { Paginated } from "../util/Paginated";
+import { COLUMNS } from '../util/Columns';
 
-const IndeterminateCheckbox = React.forwardRef(
-  ({ indeterminate, ...rest }, ref) => {
-    const defaultRef = React.useRef()
-    const resolvedRef = ref || defaultRef
-
-    React.useEffect(() => {
-      resolvedRef.current.indeterminate = indeterminate
-    }, [resolvedRef, indeterminate])
-    return (
-      <>
-        {/* <input type="checkbox" ref={resolvedRef} {...rest} value={checked} onChange={handleChange} /> */}
-        <input type="checkbox" ref={resolvedRef} {...rest}   />
-      </>
-    )
-  }
-)
-
-// function Table({ columns, data, onRowSelectStateChange, onRowClickFunc, checked, handleChange }) {
-function Table({ columns, data, onRowSelectStateChange, onRowClickFunc  }) {  
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    selectedFlatRows,
-    state: { selectedRowIds },
-  } = useTable(
-    {
-      columns,
-      data,
-      initialState: {
-        // selectedRowIds: {
-        //   "3":true
-        // }
-      },
-      stateReducer: (newState, action) => {
-        console.log(action.id);
-
-        if (action.type === "toggleRowSelected") {
-          newState.selectedRowIds = {
-            [action.id]: true
-          }
-        }
-        console.log(newState)
-        return newState;
-      },
-    },
-    useRowSelect,
-    hooks => {
-      hooks.visibleColumns.push(columns => [
-        // Let's make a column for selection
-        {
-          id: 'selection',
-          // The header can use the table's getToggleAllRowsSelectedProps method
-          // to render a checkbox
-          Header: ({ getToggleAllRowsSelectedProps }) => (
-            <div>
-              {/* <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} /> */}
-              <IndeterminateCheckbox />
-            </div>
-          ),
-          Cell: ({ row }) => (
-            <div>
-              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-            </div>
-          ),
-        },
-        ...columns,
-      ])
-    }
-  )
-
-  // Row-select state change
-  useEffect(() => {
-     onRowSelectStateChange(selectedRowIds) 
-
-    console.log(selectedRowIds)
-    console.log(selectedFlatRows.map((row) => row.original))
-    const all = selectedFlatRows.map((row) => row)
-
-    console.log(all)
-    // onRowClickFunc(all, all.cell)
-    console.log(selectedFlatRows)
-   }
-  ,
-    [onRowSelectStateChange,selectedRowIds]);
-
- 
-  // useEffect(() => onRowSelectStateChange(selectedFlatRows.map((row) => row.original))
-  //   , [onRowSelectStateChange, selectedFlatRows]);
- 
-  return (
-    <>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.slice(0, 10).map((row, i) => {
-            prepareRow(row)
-            return (
-              <tr {...row.getRowProps()} >
-                 {/* onClick={handleRowClick(row)}>     */}
-                
-                {row.cells.map(cell => {
-                  // return <td onClick={() => console.info(row.values.id, cell.value)} {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                  return <td onClick={() => onRowClickFunc(row,cell)} {...cell.getCellProps()}>{cell.render('Cell')}</td>
-
-                  // return <td   {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                })}
- 
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
-      {/* <p>Selected Rows: {Object.keys(selectedRowIds).length}</p>
-      <pre>
-        <code>
-          {JSON.stringify(
-            {
-              selectedRowIds: selectedRowIds,
-              'selectedFlatRows[].original': selectedFlatRows.map(
-                d => d.original
-              ),
-            },
-            null,
-            2
-          )}
-        </code>
-      </pre> */}
-    </>
-  )
-}
-
+//點選row時，傳回給母畫面
 function OrderNo_check(props) {
-  const [checked, setChecked] = React.useState(false);
 
-  const [selectedRowIds, setSelectedRowIds] = React.useState({});
-  // console.log('selectedRowIds', selectedRowIds)
+  let controller = new AbortController();
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [selectedRowIds, setSelectedRowIds] = useState({});
+  //點選的row id
+  const [clickRowid, setClickRowid] = useState(null);
+
+  // close/open modal
   const [modal, setModal] = useState(false);
-
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: 'Name',
-        columns: [
-          {
-            Header: 'First Name',
-            accessor: 'first_name',
-          },
-          {
-            Header: 'Last Name',
-            accessor: 'last_name',
-          },
-        ],
-      },
-      {
-        Header: 'Info',
-        columns: [
-          {
-            Header: 'id',
-            accessor: 'id',
-          }
-        ],
-      },
-    ],
-    []
-  )
-
   const setOn = (e) => {
     e.preventDefault();
     e.stopPropagation();
     setModal(!modal);
   };
 
-  const [clickRowid, setClickRowid] = React.useState({});
-
-  function checkRow(row, cell) {
-    console.log(row)
-    console.log(cell)
-    // console.log(row.values.id)
-    // console.log(cell.row.original)
+  //點選row，得到id，更新明細資料
+  const checkRow = (row) => {
+    console.log(row.values.id)
     setClickRowid(row.values.id)
-
-    setChecked(!checked);  
-
-  }
-
- 
-
-
-  const checkButton = (e) => {
-    e.preventDefault();
-    console.log(clickRowid)
-    console.log(selectedRowIds)
-    selectedRowIds ? props.value(clickRowid || selectedRowIds) : props.value("");
-    setModal(!modal);
   };
 
-  
+  const fetchIdData =  async() => {
+    const { data } = await axios.get(`https://fakestoreapi.com/products/${clickRowid}`);
+    props.setListValue([{
+      id: data.id,
+      name: data.title,
+      username: data.category,
+      smallp: 's'
+    }])
 
-  // const data = React.useMemo(() => makeData(10, 3), []);
+   //更新請購單號
+    setSelectedRowIds(clickRowid);
+    setModal(!modal);
+  }
+
+  //default table 資料來源
   const [data, setData] = useState([]);
-  const getData = async () => {
-    const { data } = await axios.get(`https://reqres.in/api/users?page=2`);
-    const resdata = data.data;
-    var search = ['first_name', 'last_name', 'id'];
+
+
+  const isMountedRef = React.useRef(false)
+  useEffect(() => {
+    isMountedRef.current = true
+    return () => {
+      isMountedRef.current = false
+    }
+  }, [])
+
+
+  const getData = useCallback(async () => {
+    // setIsLoading(true);
+    const users = await axios.get(`https://fakestoreapi.com/products`);
+    const resdata = users.data;
     let newdata = [];
     for (var i = 0; i < resdata.length; i++) {
       var filters = Object.keys(resdata[i])
-        .filter(key => search.includes(key))
         .reduce((obj, key) => {
           obj[key] = resdata[i][key];
           return obj;
@@ -230,43 +70,85 @@ function OrderNo_check(props) {
     }
     console.log(newdata)
     setData(newdata)
-    console.log(newdata)
+    }, []);
 
-  };
-
+//EROOR1，clickRowid 以為要render畫面，用useEffect dev，其實用prop state 也可以
+  useEffect(() => {
+    // let isMounted = true;
+    getData();
+    // return () => {
+    //   isMounted = false;
+    // };
+    // return () => controller && controller.abort();
+  }, [getData]);
 
   useEffect(() => {
-    getData();
-  }, []);
+    let isMounted = true;
+    if (clickRowid) {
+      fetchIdData();
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [clickRowid]);
+
+
+  // useEffect(() => {
+  //   const controller = new AbortController()
+  //   // const signal = controller.signal
+
+  //   // const fetchIdData = async () => {
+  //   //   const { data } = await axios.get(`https://fakestoreapi.com/products/${clickRowid}`,
+  //   //     { signal: signal }
+  //   //   )
+  //   //   props.setListValue([{
+  //   //     id: data.id,
+  //   //     name: data.title,
+  //   //     username: data.category,
+  //   //     smallp: 's'
+  //   //   }])
+  //   //   //更新請購單號
+  //   //   setSelectedRowIds(clickRowid);
+  //   //   setModal(!modal);
+  //   // }
+
+  //   fetchIdData()
+
+  //   return () => {
+  //     controller.abort()
+  //   }
+  // }, [])
+
+
 
   return (
     <>
       <button className="btn btn-primary button_newitem" onClick={setOn}>
-        請購單號
+      ...
       </button>
-      {modal ? (
+
+      {modal &&
         <div className="modal-modal" onClick={setOn}>
-          <div
-            className="popup_inner"
+          <div className="popup_inner"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="orderno">
-              <Table
-                columns={columns}
+              {data && <Paginated
                 data={data}
+                columns={COLUMNS}
                 onRowSelectStateChange={setSelectedRowIds}
                 onRowClickFunc={checkRow}
               />
+              }
             </div>
             <button className="btn btn-light" onClick={setOn}>
               close
             </button>
-            <button className="btn btn-primary" onClick={checkButton}>
+            <button className="btn btn-primary" onClick={fetchIdData}>
               確定
             </button>
           </div>
         </div>
-      ) : null
       }
     </>
 
@@ -274,3 +156,5 @@ function OrderNo_check(props) {
 }
 
 export default OrderNo_check;
+
+
